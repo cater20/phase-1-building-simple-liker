@@ -34,34 +34,33 @@
  const EMPTY_HEART = '♡'
  const FULL_HEART = '♥'
  
- const articleHearts = document.querySelectorAll(".like-glyph");
- 
- function likeCallback(e) {
-   const heart = e.target;
-   mimicServerCall()
-     .then(function(){
-       if ( liker.innerText === EMPTY_HEART) {
-         liker.innerText = FULL_HEART;
-         liker.className = "activated-heart";
-       } else {
-         liker.innerText = EMPTY_HEART;
-         liker.className = "";
-       }
-     })
-     .catch((error)=> {
-      let modal = document.getElementById("modal");
+ //
+ const heartResponce = document.querySelectorAll(".like-glyph");
+
+function likefunc(event) {
+  const likeHeart = event.target;
+  mimicServerCall()
+    .then(() => {
+      if ( likeHeart.innerText === EMPTY_HEART) {
+        likeHeart.innerText = FULL_HEART;
+        likeHeart.className = "activated-heart";
+      } else {
+        likeHeart.innerText = EMPTY_HEART;
+        likeHeart.className = "";
+      }
+    })
+    .catch((error) => {
+      const modal = document.getElementById("modal");
       modal.className = "";
       modal.innerText = error;
       setTimeout(() =>  modal.className = "hidden", 3000);
     });
-     
- }
- 
- for (const glyph of articleHearts) {
-   glyph.addEventListener("click", likeCallback);
- }
- 
- 
+}
+
+for (const glyphlike of heartResponce) {
+  glyphlike.addEventListener("click", likefunc);
+}
+
 
 
 //------------------------------------------------------------------------------
